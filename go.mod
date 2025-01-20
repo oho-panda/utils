@@ -6,7 +6,7 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	go.uber.org/zap v1.27.0
-	gorm.io/gorm v1.25.12
+	gorm.io/gorm v1.25.11
 )
 
 require (
