@@ -15,10 +15,7 @@
 # vendor/
 .idea
 .vscode/
-logs/
 uploads/
 
 script/*
 /vendor/
-
-wire_gen.go
