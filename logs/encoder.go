@@ -5,7 +5,7 @@ import "go.uber.org/zap/zapcore"
 // GetFileEncoder 获取文件日志编码器
 func GetFileEncoder() *zapcore.EncoderConfig {
 	// 根据日志级别获取不同的编码器
-	if l == zapcore.InfoLevel {
+	if l == zapcore.DebugLevel {
 		return &zapcore.EncoderConfig{
 			MessageKey:     "msg",
 			LevelKey:       "level",
@@ -38,7 +38,7 @@ func GetFileEncoder() *zapcore.EncoderConfig {
 // GetConsoleEncoder 获取控制台日志编码器
 func GetConsoleEncoder() *zapcore.EncoderConfig {
 	// 根据日志级别获取不同的编码器
-	if l == zapcore.InfoLevel {
+	if l == zapcore.DebugLevel {
 		return &zapcore.EncoderConfig{
 			MessageKey:     "msg",
 			LevelKey:       "level",

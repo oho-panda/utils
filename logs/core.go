@@ -17,7 +17,7 @@ func GetFileCore(encoder zapcore.EncoderConfig, logPath string) zapcore.Core {
 		Compress:   false,
 	}
 	// 根据日志级别获取不同的core
-	if l == zapcore.InfoLevel {
+	if l == zapcore.DebugLevel {
 		return zapcore.NewCore(
 			zapcore.NewConsoleEncoder(encoder),
 			zapcore.AddSync(fileWriter),
@@ -34,7 +34,7 @@ func GetFileCore(encoder zapcore.EncoderConfig, logPath string) zapcore.Core {
 // GetConsoleCore 获取控制台日志core
 func GetConsoleCore(encoder zapcore.EncoderConfig) zapcore.Core {
 	// 根据日志级别获取不同的编码器
-	if l == zapcore.InfoLevel {
+	if l == zapcore.DebugLevel {
 		return zapcore.NewCore(
 			zapcore.NewConsoleEncoder(encoder),
 			zapcore.AddSync(os.Stdout),

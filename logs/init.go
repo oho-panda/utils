@@ -35,6 +35,11 @@ func GetLogger() *CustomLogger {
 	return logger
 }
 
+// GetLevel 获取日志级别
+func GetLevel() zapcore.Level {
+	return l
+}
+
 // InitLogs 初始化日志
 func InitLogs(service string, zapCore ...zapcore.Core) {
 	if l == 0 {
