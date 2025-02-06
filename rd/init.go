@@ -37,7 +37,7 @@ func InitRedisClient(addr, password string, db int, timeout time.Duration) {
 func Set(ctx context.Context, key, value string) bool {
 	result, err := client.Set(ctx, key, value, 0).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false
 	}
 	return result == "OK"
@@ -47,7 +47,7 @@ func Set(ctx context.Context, key, value string) bool {
 func SetEX(ctx context.Context, key, value string, ex time.Duration) bool {
 	result, err := client.Set(ctx, key, value, ex).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false
 	}
 	return result == "OK"
@@ -57,7 +57,7 @@ func SetEX(ctx context.Context, key, value string, ex time.Duration) bool {
 func Get(ctx context.Context, key string) (bool, string) {
 	result, err := client.Get(ctx, key).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false, ""
 	}
 	return true, result
@@ -67,7 +67,7 @@ func Get(ctx context.Context, key string) (bool, string) {
 func GetSet(ctx context.Context, key, value string) (bool, string) {
 	oldValue, err := client.GetSet(ctx, key, value).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false, ""
 	}
 	return true, oldValue
@@ -77,7 +77,7 @@ func GetSet(ctx context.Context, key, value string) (bool, string) {
 func ZIncrBY(ctx context.Context, key string, incr float64, member string) float64 {
 	val, err := client.ZIncrBy(ctx, key, incr, member).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return val
 }
@@ -86,7 +86,7 @@ func ZIncrBY(ctx context.Context, key string, incr float64, member string) float
 func ZRemRangeByRank(ctx context.Context, key string, start, stop int64) int64 {
 	val, err := client.ZRemRangeByRank(ctx, key, start, stop).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return val
 }
@@ -94,7 +94,7 @@ func ZRemRangeByRank(ctx context.Context, key string, start, stop int64) int64 {
 func ZRevRangeWithScores(ctx context.Context, key string, start, stop int64) []redis.Z {
 	val, err := client.ZRevRangeWithScores(ctx, key, start, stop).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return val
 }
@@ -103,7 +103,7 @@ func ZRevRangeWithScores(ctx context.Context, key string, start, stop int64) []r
 func Incr(ctx context.Context, key string) int64 {
 	val, err := client.Incr(ctx, key).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return val
 }
@@ -112,7 +112,7 @@ func Incr(ctx context.Context, key string) int64 {
 func IncrBy(ctx context.Context, key string, incr int64) int64 {
 	val, err := client.IncrBy(ctx, key, incr).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return val
 }
@@ -121,7 +121,7 @@ func IncrBy(ctx context.Context, key string, incr int64) int64 {
 func IncrByFloat(ctx context.Context, key string, incrFloat float64) float64 {
 	val, err := client.IncrByFloat(ctx, key, incrFloat).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return val
 }
@@ -130,7 +130,7 @@ func IncrByFloat(ctx context.Context, key string, incrFloat float64) float64 {
 func Decr(ctx context.Context, key string) int64 {
 	val, err := client.Decr(ctx, key).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return val
 }
@@ -139,7 +139,7 @@ func Decr(ctx context.Context, key string) int64 {
 func DecrBy(ctx context.Context, key string, incr int64) int64 {
 	val, err := client.DecrBy(ctx, key, incr).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return val
 }
@@ -168,7 +168,7 @@ func Expire(ctx context.Context, key string, ex time.Duration) bool {
 func LPush(ctx context.Context, key string, date ...interface{}) int64 {
 	result, err := client.LPush(ctx, key, date).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return result
 }
@@ -177,7 +177,7 @@ func LPush(ctx context.Context, key string, date ...interface{}) int64 {
 func RPush(ctx context.Context, key string, date ...interface{}) int64 {
 	result, err := client.RPush(ctx, key, date).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return result
 }
@@ -186,7 +186,7 @@ func RPush(ctx context.Context, key string, date ...interface{}) int64 {
 func LPop(ctx context.Context, key string) (bool, string) {
 	val, err := client.LPop(ctx, key).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false, ""
 	}
 	return true, val
@@ -196,7 +196,7 @@ func LPop(ctx context.Context, key string) (bool, string) {
 func RPop(ctx context.Context, key string) (bool, string) {
 	val, err := client.RPop(ctx, key).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false, ""
 	}
 	return true, val
@@ -206,7 +206,7 @@ func RPop(ctx context.Context, key string) (bool, string) {
 func LIndex(ctx context.Context, key string, index int64) (bool, string) {
 	val, err := client.LIndex(ctx, key, index).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false, ""
 	}
 	return true, val
@@ -216,7 +216,7 @@ func LIndex(ctx context.Context, key string, index int64) (bool, string) {
 func LLen(ctx context.Context, key string) int64 {
 	val, err := client.LLen(ctx, key).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return val
 }
@@ -225,7 +225,7 @@ func LLen(ctx context.Context, key string) int64 {
 func LRange(ctx context.Context, key string, start, stop int64) []string {
 	vales, err := client.LRange(ctx, key, start, stop).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return vales
 }
@@ -234,7 +234,7 @@ func LRange(ctx context.Context, key string, start, stop int64) []string {
 func LRem(ctx context.Context, key string, count int64, data interface{}) bool {
 	_, err := client.LRem(ctx, key, count, data).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return true
 }
@@ -243,7 +243,7 @@ func LRem(ctx context.Context, key string, count int64, data interface{}) bool {
 func LInsert(ctx context.Context, key string, pivot int64, data interface{}) bool {
 	err := client.LInsert(ctx, key, "after", pivot, data).Err()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false
 	}
 	return true
@@ -255,7 +255,7 @@ func LInsert(ctx context.Context, key string, pivot int64, data interface{}) boo
 func SAdd(ctx context.Context, key string, data ...interface{}) bool {
 	err := client.SAdd(ctx, key, data).Err()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false
 	}
 	return true
@@ -265,7 +265,7 @@ func SAdd(ctx context.Context, key string, data ...interface{}) bool {
 func SCard(ctx context.Context, key string) int64 {
 	size, err := client.SCard(ctx, "key").Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return size
 }
@@ -274,7 +274,7 @@ func SCard(ctx context.Context, key string) int64 {
 func SIsMember(ctx context.Context, key string, data interface{}) bool {
 	ok, err := client.SIsMember(ctx, key, data).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return ok
 }
@@ -283,7 +283,7 @@ func SIsMember(ctx context.Context, key string, data interface{}) bool {
 func SMembers(ctx context.Context, key string) []string {
 	es, err := client.SMembers(ctx, key).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return es
 }
@@ -292,7 +292,7 @@ func SMembers(ctx context.Context, key string) []string {
 func SRem(ctx context.Context, key string, data ...interface{}) bool {
 	_, err := client.SRem(ctx, key, data).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false
 	}
 	return true
@@ -302,7 +302,7 @@ func SRem(ctx context.Context, key string, data ...interface{}) bool {
 func SPopN(ctx context.Context, key string, count int64) []string {
 	vales, err := client.SPopN(ctx, key, count).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return vales
 }
@@ -322,7 +322,7 @@ func HSet(ctx context.Context, key, field, value string) bool {
 func HGet(ctx context.Context, key, field string) string {
 	val, err := client.HGet(ctx, key, field).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return val
 }
@@ -340,7 +340,7 @@ func HMGet(ctx context.Context, key string, fields ...string) []interface{} {
 func HGetAll(ctx context.Context, key string) map[string]string {
 	data, err := client.HGetAll(ctx, key).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return data
 }
@@ -349,7 +349,7 @@ func HGetAll(ctx context.Context, key string) map[string]string {
 func HKeys(ctx context.Context, key string) []string {
 	fields, err := client.HKeys(ctx, key).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return fields
 }
@@ -358,7 +358,7 @@ func HKeys(ctx context.Context, key string) []string {
 func HLen(ctx context.Context, key string) int64 {
 	size, err := client.HLen(ctx, key).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 	}
 	return size
 }
@@ -367,7 +367,7 @@ func HLen(ctx context.Context, key string) int64 {
 func HMSet(ctx context.Context, key string, data map[string]interface{}) bool {
 	result, err := client.HMSet(ctx, key, data).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false
 	}
 	return result
@@ -377,7 +377,7 @@ func HMSet(ctx context.Context, key string, data map[string]interface{}) bool {
 func HSetNX(ctx context.Context, key, field string, value interface{}) bool {
 	result, err := client.HSetNX(ctx, key, field, value).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false
 	}
 	return result
@@ -387,7 +387,7 @@ func HSetNX(ctx context.Context, key, field string, value interface{}) bool {
 func HDel(ctx context.Context, key string, fields ...string) bool {
 	_, err := client.HDel(ctx, key, fields...).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false
 	}
 	return true
@@ -397,7 +397,7 @@ func HDel(ctx context.Context, key string, fields ...string) bool {
 func HExists(ctx context.Context, key, field string) bool {
 	result, err := client.HExists(ctx, key, field).Result()
 	if err != nil {
-		logs.CtxError(ctx, err.Error())
+		logs.CtxWarn(ctx, err.Error())
 		return false
 	}
 	return result

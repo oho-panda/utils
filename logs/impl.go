@@ -2,6 +2,7 @@ package logs
 
 import (
 	"context"
+	"errors"
 	"go.uber.org/zap/zapcore"
 	glog "gorm.io/gorm/logger"
 	"time"
@@ -61,7 +62,7 @@ func (l *GormLogger) Trace(ctx context.Context, begin time.Time, fc func() (stri
 	elapsed := time.Since(begin)
 	sql, rows := fc()
 
-	if err != nil {
+	if err != nil && !errors.Is(err, glog.ErrRecordNotFound) {
 		// 错误级别日志
 		ctxLog(ctx, zapcore.ErrorLevel, "timeConsume: %s, rows: %d, sql: %s, error: %v", elapsed, rows, sql, err)
 	} else {
