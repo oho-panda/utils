@@ -1,4 +1,4 @@
-module github.com/Free-D/utils
+module github.com/oho-panda/utils
 
 go 1.22
 

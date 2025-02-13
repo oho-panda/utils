@@ -3,7 +3,7 @@ package logs
 import (
 	"context"
 	"fmt"
-	"github.com/Free-D/utils/consts"
+	"github.com/oho-panda/utils/consts"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
