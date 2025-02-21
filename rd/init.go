@@ -31,6 +31,11 @@ func InitRedisClient(addr, password string, db int, timeout time.Duration) {
 	})
 }
 
+// GetRedisClient 获取redis客户端
+func GetRedisClient() *redis.Client {
+	return client
+}
+
 /*------------------------------------ 字符 操作 ------------------------------------*/
 
 // Set 设置 key的值

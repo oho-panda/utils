@@ -47,6 +47,7 @@ func FailOfMessage(ctx *gin.Context, msg string) {
 	result(ctx, err, nil, msg)
 }
 
+// FailOfCode 返回失败后的状态码
 func FailOfCode(ctx *gin.Context, code int) {
 	var msg string
 	switch code {
@@ -63,6 +64,7 @@ func FailOfData(ctx *gin.Context, data any) {
 	result(ctx, err, data, "")
 }
 
+// Res 返回结果
 func Res(c *gin.Context, code int, data any, msg string) {
 	result(c, code, data, msg)
 }
