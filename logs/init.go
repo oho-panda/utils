@@ -3,7 +3,7 @@ package logs
 import (
 	"context"
 	"fmt"
-	"github.com/oho-panda/utils/consts"
+	"github.com/oho-panda/utils/v2/consts"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )

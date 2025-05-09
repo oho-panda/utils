@@ -8,7 +8,7 @@ import (
 
 func TestRedis(t *testing.T) {
 	ctx := context.Background()
-	//InitRedisClient("ws.pdfree.top:63279", "winservertestredis@!", 6, time.Second*10)
+	//InitRedisClient("redis host", "redis password", 6, time.Second*10)
 	set := Set(ctx, "test", "111")
 	if set {
 		fmt.Println("redis test success")

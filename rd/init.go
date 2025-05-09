@@ -2,7 +2,7 @@ package rd
 
 import (
 	"context"
-	"github.com/oho-panda/utils/logs"
+	"github.com/oho-panda/utils/v2/logs"
 	"github.com/redis/go-redis/v9"
 	"sync"
 	"time"

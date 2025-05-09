@@ -1,7 +1,6 @@
 package res
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
 	"time"
@@ -22,33 +21,33 @@ const (
 )
 
 // result 返回结果
-func result(c *gin.Context, code int, data any, msg string) {
+func result(code int, data any, msg string) *Response {
 	timer := strconv.FormatInt(time.Now().UnixMicro(), 10)
-	c.JSON(success, Response{
+	return &Response{
 		Code:    code,
 		Data:    data,
 		Message: msg,
 		Timer:   timer,
-	})
+	}
 }
 
 // SuccessOfMessage 返回成功后的提示消息
-func SuccessOfMessage(ctx *gin.Context, msg string) {
-	result(ctx, success, nil, msg)
+func SuccessOfMessage(msg string) *Response {
+	return result(success, nil, msg)
 }
 
 // SuccessOfData 返回成功后的数据
-func SuccessOfData(ctx *gin.Context, data any) {
-	result(ctx, success, data, "")
+func SuccessOfData(data any) *Response {
+	return result(success, data, "")
 }
 
 // FailOfMessage 返回失败后的提示消息
-func FailOfMessage(ctx *gin.Context, msg string) {
-	result(ctx, err, nil, msg)
+func FailOfMessage(msg string) *Response {
+	return result(err, nil, msg)
 }
 
 // FailOfCode 返回失败后的状态码
-func FailOfCode(ctx *gin.Context, code int) {
+func FailOfCode(code int) *Response {
 	var msg string
 	switch code {
 	case http.StatusUnauthorized:
@@ -56,15 +55,15 @@ func FailOfCode(ctx *gin.Context, code int) {
 	case http.StatusForbidden:
 		msg = "无权限"
 	}
-	result(ctx, code, nil, msg)
+	return result(code, nil, msg)
 }
 
 // FailOfData 返回失败后的数据
-func FailOfData(ctx *gin.Context, data any) {
-	result(ctx, err, data, "")
+func FailOfData(data any) *Response {
+	return result(err, data, "")
 }
 
 // Res 返回结果
-func Res(c *gin.Context, code int, data any, msg string) {
-	result(c, code, data, msg)
+func Res(code int, data any, msg string) *Response {
+	return result(code, data, msg)
 }
